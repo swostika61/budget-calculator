@@ -25,13 +25,33 @@ const initialExpenses = [
 
 function App() {
   const [expenses, setExpenses] = useState(initialExpenses)
+  // **** CHARGES *****
+  const [charge, setCharge] = useState('');
+  // **** AMOUNT ******
+  const [amount, setAmount] = useState('');
+
+  const handleCharge=e=>{
+    console.log(`charge ${e.target.value}`)
+    setCharge(e.target.value)
+  }
+  const handleAmount=e=>{
+    setAmount(e.target.value)
+    console.log(`amount ${e.target.value}`)
+  }
+  const handleSubmit= e =>{
+    e.preventDefault();
+  }
 
   return (
     <>
       <Alert />
       <h1>budget calculator</h1>
       <main className="App">
-        <ExpenseForm />
+        <ExpenseForm charge={charge} 
+        amount={amount} 
+        handleCharge={handleCharge} 
+        handleAmount={handleAmount} 
+        handleSubmit={handleSubmit} />
         <ExpenseList expenses={expenses} />
       </main>
       <h1>total spending: <span className="total">${expenses.reduce((acc,curr)=>{
